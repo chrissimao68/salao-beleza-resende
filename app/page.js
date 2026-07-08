@@ -76,7 +76,7 @@ export default function Page() {
             <img
               src="/logoresende.png"
               alt="Espaço Resende"
-              className="h-12 w-12 rounded-xl object-cover"
+              className="h-12 w-12 rounded-full object-cover"
             />
             <div>
               <h1 className="text-xl font-black text-[#9b6b18] dark:text-[#d8b56d]">
