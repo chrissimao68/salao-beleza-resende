@@ -1,294 +1,461 @@
 "use client"
 
+import { useState } from "react"
+import { Catamaran } from "next/font/google"
 import {
   Sparkles,
   Scissors,
-  Heart,
-  Star,
   MapPin,
   Phone,
   Clock,
   MessageCircle,
   CheckCircle,
-  Flower2,
+  Crown,
+  ImageIcon,
+  UserRound,
+  Building2,
+  Star,
+  ChevronLeft,
+  ChevronRight,
+  Quote,
 } from "lucide-react"
 
-export default function Home() {
-  const servicos = [
+const catamaran = Catamaran({
+  subsets: ["latin"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
+})
+
+const whatsappLink =
+  "https://api.whatsapp.com/send/?phone=5535988398143&text&type=phone_number&app_absent=0"
+
+export default function Page() {
+  const [fotoAtual, setFotoAtual] = useState(0)
+
+  const cleideServicos = [
     "Corte feminino",
-    "Escova e finalização",
+    "Progressiva",
+    "Escova",
+    "Hidratação",
     "Coloração",
-    "Mechas e luzes",
-    "Hidratação capilar",
-    "Manicure e pedicure",
+    "Luzes e mechas",
   ]
 
-  return (
-    <main className="min-h-screen bg-rose-50 text-zinc-800">
-      <header className="sticky top-0 z-50 border-b border-rose-100 bg-white/90 backdrop-blur-xl">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4">
-          <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-full bg-rose-500 text-white">
-              <Flower2 size={24} />
-            </div>
+  const angelicaServicos = [
+    "Depilação",
+    "Manicure",
+    "Pedicure",
+    "Unha pé e mão",
+    "Esmaltação",
+    "Cuidados femininos",
+  ]
 
+  const galeria = [
+    "/galeria-1.jpg",
+    "/galeria-2.jpg",
+    "/galeria-3.jpg",
+    "/galeria-4.jpg",
+    "/galeria-5.jpg",
+    "/galeria-6.jpg",
+  ]
+
+  const proximaFoto = () => {
+    setFotoAtual((atual) => (atual + 1) % galeria.length)
+  }
+
+  const fotoAnterior = () => {
+    setFotoAtual((atual) => (atual === 0 ? galeria.length - 1 : atual - 1))
+  }
+
+  return (
+    <main
+      className={`${catamaran.className} min-h-screen bg-[#fbf7ef] text-zinc-900 dark:bg-[#060606] dark:text-[#f7ead0]`}
+    >
+      <header className="fixed left-0 top-0 z-50 w-full border-b border-[#c9a45c]/30 bg-[#fbf7ef]/85 backdrop-blur-xl dark:bg-black/75">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3">
+          <div className="flex items-center gap-3">
+            <img
+              src="/logoresende.png"
+              alt="Espaço Resende"
+              className="h-12 w-12 rounded-xl object-cover"
+            />
             <div>
-              <h1 className="text-xl font-extrabold text-rose-700">
-                Bella Rosa
+              <h1 className="text-xl font-black text-[#9b6b18] dark:text-[#d8b56d]">
+                Espaço Resende
               </h1>
-              <p className="text-xs text-zinc-500">
-                Salão de Beleza Feminino
+              <p className="text-[10px] uppercase tracking-[0.25em] text-zinc-500 dark:text-[#f7ead0]/55">
+                Salão de Beleza
               </p>
             </div>
           </div>
 
           <a
-            href="#contato"
-            className="rounded-full bg-rose-500 px-5 py-2 font-semibold text-white transition hover:bg-rose-600"
+            href={whatsappLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="rounded-xl bg-[#d8b56d] px-4 py-2 text-sm font-black text-black transition hover:bg-[#f3d98b]"
           >
-            Agendar
+            WhatsApp
           </a>
         </div>
       </header>
 
-      <section className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-20 md:grid-cols-2">
-        <div>
-          <span className="inline-flex items-center gap-2 rounded-full bg-white px-4 py-2 text-sm font-semibold text-rose-600 shadow-sm">
-            <Sparkles size={16} />
-            Beleza, cuidado e autoestima
-          </span>
+      <section className="relative flex min-h-screen items-center overflow-hidden border-b border-[#c9a45c]/20 px-4 pt-24">
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(216,181,109,0.28),_transparent_35%)]" />
+        <div className="absolute bottom-0 left-0 h-72 w-72 rounded-full bg-[#d8b56d]/10 blur-3xl" />
 
-          <h2 className="mt-6 text-4xl font-extrabold leading-tight text-zinc-900 md:text-6xl">
-            Realce sua beleza com carinho, estilo e sofisticação
-          </h2>
+        <div className="relative mx-auto grid max-w-7xl items-center gap-12 py-16 md:grid-cols-2">
+          <div className="animate-[fadeIn_0.8s_ease-out]">
+            <span className="inline-flex items-center gap-2 rounded-xl border border-[#c9a45c]/40 bg-white/80 px-4 py-2 text-sm font-bold text-[#9b6b18] shadow-sm dark:bg-[#111] dark:text-[#d8b56d]">
+              <Sparkles size={16} />
+              Beleza, cuidado e autoestima
+            </span>
 
-          <p className="mt-6 text-lg leading-relaxed text-zinc-600">
-            Um espaço feminino pensado para cuidar de você. Oferecemos serviços
-            de cabelo, unhas, tratamentos e produções especiais para deixar seu
-            dia mais leve, bonito e confiante.
-          </p>
-
-          <div className="mt-8 flex flex-col gap-4 sm:flex-row">
-            <a
-              href="#contato"
-              className="rounded-full bg-rose-500 px-7 py-3 text-center font-bold text-white transition hover:bg-rose-600"
-            >
-              Agendar horário
-            </a>
-
-            <a
-              href="#servicos"
-              className="rounded-full border border-rose-200 bg-white px-7 py-3 text-center font-bold text-rose-600 transition hover:bg-rose-100"
-            >
-              Ver serviços
-            </a>
-          </div>
-        </div>
-
-        <div className="overflow-hidden rounded-[2rem] border border-rose-100 bg-white shadow-2xl">
-          <img
-            src="https://images.unsplash.com/photo-1560066984-138dadb4c035?q=80&w=1200&auto=format&fit=crop"
-            alt="Salão de beleza feminino"
-            className="h-[480px] w-full object-cover"
-          />
-        </div>
-      </section>
-
-      <section id="servicos" className="bg-white py-20">
-        <div className="mx-auto max-w-7xl px-4">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-extrabold text-zinc-900 md:text-4xl">
-              Nossos serviços
+            <h2 className="mt-7 text-5xl font-black leading-[0.95] text-zinc-950 dark:text-[#f7ead0] sm:text-6xl lg:text-8xl">
+              Elegância para realçar sua beleza
             </h2>
-            <p className="mt-4 text-zinc-600">
-              Cuidados completos para valorizar sua beleza em cada detalhe.
+
+            <p className="mt-7 max-w-xl text-xl leading-relaxed text-zinc-700 dark:text-[#f7ead0]/70">
+              Um salão feminino pensado para acolher, cuidar e transformar.
+              Cabelos, unhas, depilação e beleza com atendimento próximo,
+              delicado e profissional.
             </p>
+
+            <div className="mt-9 flex flex-col gap-4 sm:flex-row">
+              <a
+                href={whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="rounded-xl bg-[#d8b56d] px-8 py-4 text-center text-lg font-black text-black transition hover:-translate-y-1 hover:bg-[#f3d98b]"
+              >
+                Agendar pelo WhatsApp
+              </a>
+
+              <a
+                href="#profissionais"
+                className="rounded-xl border border-[#c9a45c]/60 px-8 py-4 text-center text-lg font-black text-[#9b6b18] transition hover:bg-[#d8b56d] hover:text-black dark:text-[#d8b56d]"
+              >
+                Conhecer o salão
+              </a>
+            </div>
           </div>
 
-          <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {servicos.map((servico) => (
-              <div
-                key={servico}
-                className="rounded-3xl border border-rose-100 bg-rose-50 p-6 transition hover:-translate-y-1 hover:shadow-xl"
-              >
-                <div className="mb-5 flex h-12 w-12 items-center justify-center rounded-2xl bg-rose-500 text-white">
-                  <Scissors size={24} />
-                </div>
-
-                <h3 className="text-xl font-bold text-zinc-900">
-                  {servico}
-                </h3>
-
-                <p className="mt-3 text-sm leading-relaxed text-zinc-600">
-                  Atendimento personalizado, produtos profissionais e acabamento
-                  feito com cuidado para você se sentir ainda mais linda.
-                </p>
-              </div>
-            ))}
+          <div className="relative mx-auto w-full max-w-lg">
+            <div className="absolute -inset-4 rounded-[2rem] bg-[#d8b56d]/20 blur-2xl" />
+            <div className="relative overflow-hidden  bg-white  shadow-2xl dark:bg-[#111]">
+              <img
+                src="/logoresende.png"
+                alt="Logo Espaço Resende"
+                className="aspect-square w-full  object-cover"
+              />
+            </div>
           </div>
         </div>
       </section>
 
       <section className="py-20">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 px-4 md:grid-cols-2">
-          <img
-            src="https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?q=80&w=1200&auto=format&fit=crop"
-            alt="Atendimento em salão de beleza"
-            className="h-[420px] w-full rounded-[2rem] object-cover shadow-xl"
-          />
-
-          <div>
-            <h2 className="text-3xl font-extrabold text-zinc-900 md:text-4xl">
-              Um salão feito para você se sentir bem
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="mx-auto max-w-3xl text-center">
+            <Crown className="mx-auto text-[#9b6b18] dark:text-[#d8b56d]" size={42} />
+            <h2 className="mt-4 text-4xl font-black md:text-6xl">
+              Beleza com cuidado em cada detalhe
             </h2>
+            <p className="mt-5 text-xl leading-relaxed text-zinc-600 dark:text-[#f7ead0]/65">
+              O Espaço Resende une técnica, carinho e bom gosto para entregar
+              uma experiência completa. Da transformação capilar ao cuidado com
+              mãos, pés e depilação, tudo é pensado para você se sentir bem.
+            </p>
+          </div>
 
-            <p className="mt-5 leading-relaxed text-zinc-600">
-              No Bella Rosa, cada atendimento é pensado para ser uma experiência
-              acolhedora. Do primeiro contato ao resultado final, nosso objetivo
-              é cuidar da sua beleza com atenção, delicadeza e profissionalismo.
+          <div className="mt-14 grid gap-5 md:grid-cols-3">
+            <Destaque titulo="Atendimento personalizado" texto="Cada cliente recebe atenção única." />
+            <Destaque titulo="Ambiente elegante" texto="Um espaço bonito, confortável e acolhedor." />
+            <Destaque titulo="Serviços completos" texto="Cabelos, unhas, depilação e beleza." />
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-[#c9a45c]/20 bg-white py-20 dark:bg-[#0d0d0d]">
+        <div className="mx-auto grid max-w-7xl gap-10 px-4 md:grid-cols-[0.9fr_1.1fr] md:items-center">
+          <div>
+            <Building2 className="text-[#9b6b18] dark:text-[#d8b56d]" size={44} />
+            <h2 className="mt-4 text-4xl font-black md:text-5xl">
+              Conheça nosso espaço
+            </h2>
+            <p className="mt-5 text-lg leading-relaxed text-zinc-600 dark:text-[#f7ead0]/65">
+              Um ambiente preparado para tornar seu momento de cuidado mais
+              leve, bonito e especial. Aqui, cada cantinho foi pensado para
+              receber você com conforto.
             </p>
 
-            <div className="mt-7 space-y-4">
+            <div className="mt-7 space-y-3">
               {[
-                "Ambiente confortável e feminino",
-                "Atendimento com horário marcado",
-                "Produtos de qualidade profissional",
-                "Serviços personalizados para cada cliente",
+                "Ambiente feminino e confortável",
+                "Atendimento com hora marcada",
+                "Espaço para cabelos, unhas e depilação",
               ].map((item) => (
-                <p key={item} className="flex items-center gap-3 font-medium">
-                  <CheckCircle className="text-rose-500" size={21} />
+                <p key={item} className="flex items-center gap-3 font-bold">
+                  <CheckCircle className="text-[#9b6b18] dark:text-[#d8b56d]" size={20} />
                   {item}
                 </p>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid gap-4 sm:grid-cols-2">
+            <img
+              src="/salao-1.jpg"
+              alt="Interior do salão"
+              className="h-72 w-full rounded-2xl object-cover shadow-xl sm:h-full"
+            />
+            <div className="grid gap-4">
+              <img
+                src="/salao-2.jpg"
+                alt="Espaço interno do salão"
+                className="h-56 w-full rounded-2xl object-cover shadow-xl"
+              />
+              <img
+                src="/salao-3.jpg"
+                alt="Ambiente do salão"
+                className="h-56 w-full rounded-2xl object-cover shadow-xl"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="profissionais" className="py-20">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="text-center">
+            <Scissors className="mx-auto text-[#9b6b18] dark:text-[#d8b56d]" size={42} />
+            <h2 className="mt-4 text-4xl font-black md:text-6xl">
+              Nossas profissionais
+            </h2>
+            <p className="mt-4 text-xl text-zinc-600 dark:text-[#f7ead0]/60">
+              Duas especialistas, um só propósito: cuidar de você.
+            </p>
+          </div>
+
+          <div className="mt-14 grid gap-8 md:grid-cols-2">
+            <ProfissionalCard
+              foto="/cleide.png"
+              nome="Cleide Resende"
+              cargo="Cabelos e transformação capilar"
+              descricao="Especialista em progressiva, escova, hidratação, coloração, luzes e cortes femininos."
+              servicos={cleideServicos}
+              icone={<Scissors size={28} />}
+            />
+
+            <ProfissionalCard
+              foto="/angelica.png"
+              nome="Angélica Resende"
+              cargo="Unhas, depilação e cuidados femininos"
+              descricao="Especialista em depilação, manicure, pedicure, unha pé e mão e esmaltação."
+              servicos={angelicaServicos}
+              icone={<UserRound size={28} />}
+            />
+          </div>
+        </div>
+      </section>
+
+      <section className="border-y border-[#c9a45c]/20 bg-white py-20 dark:bg-[#0d0d0d]">
+        <div className="mx-auto max-w-7xl px-4">
+          <div className="text-center">
+            <ImageIcon className="mx-auto text-[#9b6b18] dark:text-[#d8b56d]" size={42} />
+            <h2 className="mt-4 text-4xl font-black md:text-6xl">
+              Galeria de trabalhos
+            </h2>
+            <p className="mt-4 text-xl text-zinc-600 dark:text-[#f7ead0]/60">
+              Resultados, detalhes e momentos especiais do salão.
+            </p>
+          </div>
+
+          <div className="relative mx-auto mt-12 max-w-4xl">
+            <div className="overflow-hidden rounded-2xl border border-[#c9a45c]/30 bg-[#fbf7ef] shadow-2xl dark:bg-[#111]">
+              <img
+                src={galeria[fotoAtual]}
+                alt="Foto da galeria"
+                className="h-[420px] w-full object-cover"
+              />
+            </div>
+
+            <button
+              type="button"
+              onClick={fotoAnterior}
+              className="absolute left-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-xl bg-[#d8b56d] text-black shadow-lg"
+              aria-label="Foto anterior"
+            >
+              <ChevronLeft />
+            </button>
+
+            <button
+              type="button"
+              onClick={proximaFoto}
+              className="absolute right-3 top-1/2 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-xl bg-[#d8b56d] text-black shadow-lg"
+              aria-label="Próxima foto"
+            >
+              <ChevronRight />
+            </button>
+
+            <div className="mt-5 grid grid-cols-6 gap-2">
+              {galeria.map((foto, index) => (
+                <button
+                  key={foto}
+                  type="button"
+                  onClick={() => setFotoAtual(index)}
+                  className={`overflow-hidden rounded-lg border ${
+                    fotoAtual === index
+                      ? "border-[#d8b56d]"
+                      : "border-[#c9a45c]/20"
+                  }`}
+                >
+                  <img
+                    src={foto}
+                    alt={`Miniatura ${index + 1}`}
+                    className="h-16 w-full object-cover"
+                  />
+                </button>
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      <section className="bg-white py-20">
+      <section className="py-20">
         <div className="mx-auto max-w-7xl px-4">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-extrabold text-zinc-900 md:text-4xl">
-              Clientes felizes
+          <div className="text-center">
+            <Star className="mx-auto text-[#9b6b18] dark:text-[#d8b56d]" size={42} />
+            <h2 className="mt-4 text-4xl font-black md:text-6xl">
+              Clientes satisfeitas
             </h2>
-            <p className="mt-4 text-zinc-600">
-              Depoimentos fictícios para você trocar depois.
-            </p>
           </div>
 
           <div className="mt-12 grid gap-6 md:grid-cols-3">
-            {[
-              "Atendimento maravilhoso. Saí renovada e amei o resultado.",
-              "O espaço é lindo, confortável e fui muito bem atendida.",
-              "Meu cabelo ficou perfeito. Já quero voltar mais vezes.",
-            ].map((texto, index) => (
-              <div
-                key={index}
-                className="rounded-3xl border border-rose-100 bg-rose-50 p-6"
-              >
-                <div className="flex gap-1 text-yellow-400">
-                  {[1, 2, 3, 4, 5].map((star) => (
-                    <Star key={star} size={18} fill="currentColor" />
-                  ))}
-                </div>
-
-                <p className="mt-4 leading-relaxed text-zinc-600">
-                  “{texto}”
-                </p>
-
-                <h3 className="mt-5 font-bold text-rose-600">
-                  Cliente {index + 1}
-                </h3>
-              </div>
-            ))}
+            <Depoimento nome="Cliente 1" texto="Atendimento maravilhoso, ambiente lindo e resultado impecável." />
+            <Depoimento nome="Cliente 2" texto="Saí me sentindo renovada. O cuidado em cada detalhe faz diferença." />
+            <Depoimento nome="Cliente 3" texto="Profissionais atenciosas, caprichosas e muito cuidadosas." />
           </div>
         </div>
       </section>
 
-      <section id="contato" className="py-20">
-        <div className="mx-auto max-w-7xl px-4">
-          <div className="grid gap-10 rounded-[2rem] bg-rose-500 p-8 text-white shadow-2xl md:grid-cols-2 md:p-12">
-            <div>
-              <h2 className="text-3xl font-extrabold md:text-4xl">
-                Agende seu horário
-              </h2>
+      <section className="border-t border-[#c9a45c]/20 bg-white py-20 dark:bg-[#0d0d0d]">
+        <div className="mx-auto max-w-5xl px-4 text-center">
+          <MessageCircle className="mx-auto text-[#9b6b18] dark:text-[#d8b56d]" size={48} />
 
-              <p className="mt-4 leading-relaxed text-rose-50">
-                Entre em contato e escolha o melhor dia para cuidar de você.
-              </p>
+          <h2 className="mt-5 text-4xl font-black md:text-6xl">
+            Agende seu horário pelo WhatsApp
+          </h2>
 
-              <div className="mt-8 space-y-4">
-                <p className="flex items-center gap-3">
-                  <Phone size={20} />
-                  (35) 99999-9999
-                </p>
+          <p className="mx-auto mt-4 max-w-2xl text-xl leading-relaxed text-zinc-600 dark:text-[#f7ead0]/65">
+            Fale diretamente com o Espaço Resende e escolha o melhor horário
+            para seu atendimento.
+          </p>
 
-                <p className="flex items-center gap-3">
-                  <MessageCircle size={20} />
-                  @bellarosa.salao
-                </p>
+          <a
+            href={whatsappLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-8 inline-block rounded-xl bg-[#d8b56d] px-10 py-4 text-xl font-black text-black transition hover:-translate-y-1 hover:bg-[#f3d98b]"
+          >
+            Chamar no WhatsApp
+          </a>
 
-                <p className="flex items-center gap-3">
-                  <MapPin size={20} />
-                  Rua das Flores, 123 - Centro
-                </p>
-
-                <p className="flex items-center gap-3">
-                  <Clock size={20} />
-                  Segunda a sábado, das 9h às 19h
-                </p>
-              </div>
-            </div>
-
-            <div className="rounded-3xl bg-white p-6 text-zinc-800 shadow-xl">
-              <h3 className="text-2xl font-extrabold text-rose-600">
-                Fale conosco
-              </h3>
-
-              <form className="mt-6 space-y-4">
-                <input
-                  type="text"
-                  placeholder="Seu nome"
-                  className="w-full rounded-xl border border-rose-100 px-4 py-3 outline-none focus:ring-2 focus:ring-rose-300"
-                />
-
-                <input
-                  type="tel"
-                  placeholder="Seu telefone"
-                  className="w-full rounded-xl border border-rose-100 px-4 py-3 outline-none focus:ring-2 focus:ring-rose-300"
-                />
-
-                <select className="w-full rounded-xl border border-rose-100 px-4 py-3 outline-none focus:ring-2 focus:ring-rose-300">
-                  <option>Escolha um serviço</option>
-                  {servicos.map((servico) => (
-                    <option key={servico}>{servico}</option>
-                  ))}
-                </select>
-
-                <button
-                  type="button"
-                  className="w-full rounded-xl bg-rose-500 py-3 font-bold text-white transition hover:bg-rose-600"
-                >
-                  Enviar mensagem
-                </button>
-              </form>
-            </div>
+          <div className="mt-10 grid gap-5 text-left sm:grid-cols-3">
+            <Info icon={<Phone size={21} />} text="(35) 98839-8143" />
+            <Info icon={<MapPin size={21} />} text="Endereço a definir" />
+            <Info icon={<Clock size={21} />} text="Horário a definir" />
           </div>
         </div>
       </section>
 
-      <footer className="bg-zinc-950 py-8 text-white">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 md:flex-row">
-          <div className="flex items-center gap-2">
-            <Heart className="text-rose-400" size={20} />
-            <span className="font-bold">Bella Rosa Salão</span>
+      <footer className="border-t border-[#c9a45c]/20 bg-[#fbf7ef] py-8 dark:bg-black">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-4 text-center md:flex-row">
+          <div>
+            <h2 className="text-xl font-black text-[#9b6b18] dark:text-[#d8b56d]">
+              Espaço Resende
+            </h2>
+            <p className="text-xs uppercase tracking-[0.3em] text-zinc-500 dark:text-[#f7ead0]/50">
+              Salão de Beleza
+            </p>
           </div>
 
-          <p className="text-sm text-zinc-400">
-            © 2026 Bella Rosa. Todos os direitos reservados.
+          <p className="text-sm text-zinc-500 dark:text-[#f7ead0]/45">
+            © 2026 Espaço Resende. Todos os direitos reservados.
           </p>
         </div>
       </footer>
     </main>
+  )
+}
+
+function Destaque({ titulo, texto }) {
+  return (
+    <div className="rounded-2xl border border-[#c9a45c]/25 bg-white p-7 shadow-xl shadow-black/10 transition hover:-translate-y-1 dark:bg-[#111] dark:shadow-black/40">
+      <Star className="text-[#9b6b18] dark:text-[#d8b56d]" fill="currentColor" />
+      <h3 className="mt-4 text-2xl font-black">{titulo}</h3>
+      <p className="mt-2 text-lg text-zinc-600 dark:text-[#f7ead0]/60">{texto}</p>
+    </div>
+  )
+}
+
+function ProfissionalCard({ foto, nome, cargo, descricao, servicos, icone }) {
+  return (
+    <div className="overflow-hidden rounded-2xl border border-[#c9a45c]/30 bg-white shadow-2xl shadow-black/10 dark:bg-[#111] dark:shadow-black/40">
+      <img src={foto} alt={nome} className="h-96 w-full object-cover" />
+
+      <div className="p-7">
+        <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-[#d8b56d] text-black">
+          {icone}
+        </div>
+
+        <h3 className="text-3xl font-black text-[#9b6b18] dark:text-[#d8b56d]">
+          {nome}
+        </h3>
+
+        <p className="mt-1 text-lg font-bold text-zinc-500 dark:text-[#f7ead0]/55">
+          {cargo}
+        </p>
+
+        <p className="mt-4 text-lg leading-relaxed text-zinc-600 dark:text-[#f7ead0]/65">
+          {descricao}
+        </p>
+
+        <div className="mt-6 grid gap-3 sm:grid-cols-2">
+          {servicos.map((servico) => (
+            <p key={servico} className="flex items-center gap-2 font-bold">
+              <CheckCircle size={18} className="shrink-0 text-[#9b6b18] dark:text-[#d8b56d]" />
+              {servico}
+            </p>
+          ))}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function Depoimento({ nome, texto }) {
+  return (
+    <div className="rounded-2xl border border-[#c9a45c]/25 bg-white p-7 shadow-xl shadow-black/10 dark:bg-[#111] dark:shadow-black/40">
+      <Quote className="text-[#9b6b18] dark:text-[#d8b56d]" />
+      <p className="mt-4 text-lg leading-relaxed text-zinc-600 dark:text-[#f7ead0]/65">
+        “{texto}”
+      </p>
+      <div className="mt-5 flex gap-1 text-[#d8b56d]">
+        {[1, 2, 3, 4, 5].map((item) => (
+          <Star key={item} size={18} fill="currentColor" />
+        ))}
+      </div>
+      <h3 className="mt-4 text-xl font-black text-[#9b6b18] dark:text-[#d8b56d]">
+        {nome}
+      </h3>
+    </div>
+  )
+}
+
+function Info({ icon, text }) {
+  return (
+    <p className="flex items-center justify-center gap-3 rounded-xl border border-[#c9a45c]/25 bg-[#fbf7ef] p-5 font-bold text-zinc-800 dark:bg-[#111] dark:text-[#f7ead0]/80">
+      <span className="text-[#9b6b18] dark:text-[#d8b56d]">{icon}</span>
+      {text}
+    </p>
   )
 }
